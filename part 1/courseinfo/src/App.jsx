@@ -7,19 +7,23 @@ const Header = (props) => {
   )
 }
 
+//PARTS COMPONENT
+const Part = (props) => {
+  return (
+    <>
+      <p>{props.name} {props.exercices}</p>
+    </>
+  )
+}
+
 // CONTENT COMPONENT
 const Content = (props) => {
   return (
     <>
-      <p>
-        {props.parts[0].part1} {props.exercices[0].exercices1}
-      </p>
-      <p>
-        {props.parts[1].part2} {props.exercices[1].exercices2}
-      </p>
-      <p>
-        {props.parts[2].part3} {props.exercices[2].exercices3}
-      </p>
+      <Part name={props.parts[0].name} exercices={props.parts[0].exercices} />
+      <Part name={props.parts[1].name} exercices={props.parts[1].exercices} />
+      <Part name={props.parts[2].name} exercices={props.parts[2].exercices} />
+
     </>
   )
 }
@@ -28,9 +32,11 @@ const Content = (props) => {
 const Total = (props) => {
   return (
     <>
-      <p>Number of exercises {props.exercices[0].exercices1
-        + props.exercices[1].exercices2
-        + props.exercices[2].exercices3}</p>
+      <p>Number of exercises
+        {props.parts[0].exercices
+          + props.parts[1].exercices
+          + props.parts[2].exercices}
+      </p>
     </>
   )
 }
@@ -38,21 +44,17 @@ const Total = (props) => {
 const App = () => {
   const course = 'Half Stack application development'
   const parts = [
-    { part1: 'Fundamentals of React' },
-    { part2: 'Using props to pass data' },
-    { part3: 'State of a component' }
+    { name: 'Fundamentals of React', exercices: 10 },
+    { name: 'Using props to pass data', exercices: 7 },
+    { name: 'State of a component', exercices: 14 }
   ]
-  const exercices = [
-    { exercices1: 10 },
-    { exercices2: 7 },
-    { exercices3: 14 }
-  ]
+
 
   return (
     <>
       <Header course={course} />
-      <Content parts={parts} exercices={exercices} />
-      <Total exercices={exercices} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </>
   )
 }
